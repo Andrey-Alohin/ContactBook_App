@@ -7,6 +7,7 @@ import type {
   TUserInfo,
 } from "../model/types";
 import type { TResponses } from "@/shared/types/api";
+import { backRoutes } from "@/shared/config/routes";
 
 export const authApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
@@ -15,33 +16,33 @@ export const authApi = baseApi.injectEndpoints({
       TAuthRegisterReq
     >({
       query: (body) => ({
-        url: "/auth/register",
+        url: backRoutes.auth.register,
         method: "POST",
         body,
       }),
     }),
     postLogInUser: build.mutation<TResponses<TAccessToken>, TAuthLogInReq>({
       query: (body) => ({
-        url: "/auth/login",
+        url: backRoutes.auth.login,
         method: "POST",
         body,
       }),
     }),
     getUserInfo: build.query<TResponses<TUserInfo>, void>({
       query: () => ({
-        url: "/auth/me",
+        url: backRoutes.auth.getUserInfo,
         method: "GET",
       }),
     }),
     postLogOutUser: build.mutation<void, void>({
       query: () => ({
-        url: "/auth/logout",
+        url: backRoutes.auth.logout,
         method: "POST",
       }),
     }),
     postRefreshUser: build.mutation<TResponses<TAccessToken>, void>({
       query: () => ({
-        url: "/auth/refresh",
+        url: backRoutes.auth.refresh,
         method: "POST",
       }),
     }),

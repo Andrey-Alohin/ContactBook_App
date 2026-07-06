@@ -6,6 +6,8 @@ import { isFetchBaseQueryError } from "@/shared/api/utils";
 import { useDispatch } from "react-redux";
 import * as Yup from "yup";
 import { notify, type Tnotify } from "@/shared/utils";
+import { useNavigate } from "react-router-dom";
+import { frontRoutes } from "@/shared/config/routes";
 const LOGIN_ID = "loginUser";
 const notifyLogin: Tnotify = notify(LOGIN_ID);
 
@@ -20,13 +22,14 @@ export const initialValues = {
 };
 
 export const validationSchema = Yup.object({
-  email: Yup.string().email().required(),
-  password: Yup.string().min(7).max(20).required(),
+  email: Yup.string().email().required().label("Email"),
+  password: Yup.string().min(7).max(20).required().label("Password"),
 });
 
 export const useLoginHandleSubmit = () => {
   const [loginUser] = usePostLogInUserMutation();
   const dispatch = useDispatch<AppDispatch>();
+  const navigate = useNavigate();
 
   return async (
     values: typeof initialValues,
@@ -37,6 +40,7 @@ export const useLoginHandleSubmit = () => {
       const { accessToken } = (await loginUser(values).unwrap()).data;
       dispatch(setAccessToken(accessToken));
       notifyLogin.success("Logged in successfully");
+      navigate(frontRoutes.pages.home);
       actions.resetForm();
     } catch (error) {
       if (isFetchBaseQueryError(error)) {

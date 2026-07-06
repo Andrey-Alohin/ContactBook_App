@@ -1,10 +1,11 @@
 import type { RootState } from "@/app/store";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { backRoutes } from "../config/routes";
 
 export const baseApi = createApi({
   reducerPath: "api",
   baseQuery: fetchBaseQuery({
-    baseUrl: "https://contacts-app-5b4k.onrender.com",
+    baseUrl: backRoutes.baseURL,
     prepareHeaders: (headers, { getState }) => {
       const token = (getState() as RootState).auth.accessToken;
 

@@ -1,8 +1,8 @@
-import { LoginPage } from "@/pages/Auth";
 import { StoreProvider } from "./providers/StoreProvider";
 import { Toaster } from "react-hot-toast";
 import { ThemeProvider } from "./providers/ThemeProvider";
 import { Layout } from "./providers/Layout";
+import { AppRouter } from "./router/AppRouter";
 
 function App() {
   console.log("render");
@@ -11,7 +11,7 @@ function App() {
     <ThemeProvider>
       <StoreProvider>
         <Layout>
-          <LoginPage />
+          <AppRouter />
         </Layout>
         <Toaster />
       </StoreProvider>

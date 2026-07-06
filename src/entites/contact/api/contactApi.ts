@@ -6,6 +6,7 @@ import type {
   TPatchContact,
 } from "../model/types";
 import type { TResponses } from "@/shared/types/api";
+import { backRoutes } from "@/shared/config/routes";
 
 type TResponseGetAllContacts = {
   page: number;
@@ -35,30 +36,30 @@ export const contactsApi = baseApi.injectEndpoints({
       TGetAllContactsQuery
     >({
       query: (body) => ({
-        url: "/contacts",
+        url: backRoutes.baseURL,
         params: body,
       }),
     }),
     getContactById: build.query<TContact, string>({
-      query: (contactId) => `/contacts/${contactId}`,
+      query: (contactId) => backRoutes.contacts.byId(contactId),
     }),
     addContact: build.mutation<TContact, TCreateContact>({
       query: (body) => ({
-        url: "/contacts",
+        url: backRoutes.contacts.baseURL,
         method: "POST",
         body,
       }),
     }),
     patchContactById: build.mutation<TContact, TPatchContact>({
       query: ({ contactId, body }) => ({
-        url: `/contacts/${contactId}`,
+        url: backRoutes.contacts.byId(contactId),
         method: "PATCH",
         body,
       }),
     }),
     deleteContactById: build.mutation<void, string>({
       query: (contactId) => ({
-        url: `/contacts/${contactId}`,
+        url: backRoutes.contacts.byId(contactId),
         method: "DELETE",
       }),
     }),

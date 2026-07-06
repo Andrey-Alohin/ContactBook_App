@@ -3,6 +3,8 @@ import { usePostRegisterUserMutation } from "@/entites/user/api/authApi";
 import type { FormikHelpers } from "formik";
 import { isFetchBaseQueryError } from "@/shared/api/utils";
 import { notify, type Tnotify } from "@/shared/utils";
+import { useNavigate } from "react-router-dom";
+import { frontRoutes } from "@/shared/config/routes";
 const REGISTER_ID = "registerNewUser";
 const notifyReg: Tnotify = notify(REGISTER_ID);
 
@@ -26,6 +28,7 @@ export const validationShema = Yup.object({
 
 export const useRegisterHandleSubmit = () => {
   const [registerUser] = usePostRegisterUserMutation();
+  const navigate = useNavigate();
   return async (
     values: typeof initialValues,
     actions: FormikHelpers<typeof initialValues>
@@ -34,6 +37,7 @@ export const useRegisterHandleSubmit = () => {
       notifyReg.loading();
       await registerUser(values).unwrap();
       notifyReg.success("Successfully registered new user!");
+      navigate(frontRoutes.pages.login);
       actions.resetForm();
     } catch (error) {
       if (isFetchBaseQueryError(error)) {

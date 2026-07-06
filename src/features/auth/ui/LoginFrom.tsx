@@ -1,4 +1,4 @@
-import { DynamicForm } from "@/shared/ui/DynamicForm/DynamicForm";
+import { DynamicForm } from "@/shared/ui/index";
 import * as model from "../model/LoginForm";
 
 export function LoginForm() {
