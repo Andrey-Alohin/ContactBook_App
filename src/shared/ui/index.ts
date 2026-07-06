@@ -1,1 +1,1 @@
-import { DynamicForm } from "./DynamicForm/DynamicForm.tsx";
+export { DynamicForm } from "./DynamicForm/DynamicForm";

@@ -1,5 +1,5 @@
 import { LoginForm } from "@/features/auth/ui/LoginFrom";
-import { Box, Tab, Tabs } from "@mui/material";
+import { Box } from "@mui/material";
 
 export function LoginPage() {
   return (
@@ -9,10 +9,6 @@ export function LoginPage() {
       justifyContent={"center"}
       alignItems={"center"}
     >
-      <Tabs>
-        <Tab />
-        <Tab />
-      </Tabs>
       <LoginForm />
     </Box>
   );
